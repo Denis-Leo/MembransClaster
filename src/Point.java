@@ -57,23 +57,46 @@ public class Point {
     }
 
 
-    public void rotation(double angle, int axis){
+    public Point rotation(double angle, int axis){
+        angle = angle*Math.PI/180.0;
+
         double x_new = this.x;
         double y_new = this.y;
         double z_new = this.z;
 
         if (axis == 1){
-            x_new = this.x;
+            // x_new = this.x;
             y_new = this.y*Math.cos(angle) - this.z*Math.sin(angle);
             z_new = this.y*Math.sin(angle) + this.z*Math.cos(angle);
         }
-        
+
+        if (axis == 2){
+            x_new = this.x*Math.cos(angle) + this.z*Math.sin(angle);
+            // y_new = this.y;
+            z_new = -this.x*Math.sin(angle) + this.z*Math.cos(angle);
+        }
+        if (axis == 3){
+            x_new = this.x*Math.cos(angle) - this.y*Math.sin(angle);
+            y_new = this.x*Math.sin(angle) + this.y*Math.cos(angle);
+            // z_new = this.z;
+        }
 
 
-        this.x = x_new;
-        this.y = y_new;
-        this.z = z_new;
-        
+        return new Point(x_new,y_new,z_new);
+
     }
+
+
+    public Point move( Vector vector){
+        
+        double x_new = this.x + vector.a;
+        double y_new = this.y + vector.b;
+        double z_new = this.z + vector.c;
+
+        return new Point(x_new,y_new,z_new);
+
+    }
+
+    
 
 }

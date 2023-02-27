@@ -40,15 +40,18 @@ public class Main {
         ExportFile.nameExportDir = args[6];
 
 
-        int number_of_points = 5;
+        int number_of_points = 3;
 
-        int number_of_itaration = 15;
+        int number_of_itaration = 20;
+        
+        number_of_itaration = Integer.parseInt(args[7]);
 
 
 
 
-        Tests test = new  Tests(1);
+        Tests test = new  Tests(2);
         test.test_point();
+
 
 
 
@@ -67,7 +70,7 @@ public class Main {
                 "#LIMIT_X = " + Utils.LIMIT_X +"\n"+
                 "#LIMIT_Y = " + Utils.LIMIT_Y +"\n"+
                 "#LIMIT_Z = " + Utils.LIMIT_Z +"\n"+
-                "#  x , y , z,   phi , theta ");
+                "#  x , y , z,   phi , theta , gamma ");
 
 
         ExportFile.addTextToExportFile(title_text, true);

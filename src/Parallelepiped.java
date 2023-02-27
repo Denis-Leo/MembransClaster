@@ -70,9 +70,10 @@ public class Parallelepiped implements Element {
 
         text =  this.center.x + SPACE+ this.center.y + SPACE+ this.center.z + SPACE ;
         text += (new Vector(this.point1, this.point5).getPhi()/Math.PI*180 +
-                SPACE + new Vector(this.point1, this.point5).getTheta()/Math.PI*180 + SPACE) ;
+                SPACE + new Vector(this.point1, this.point5).getTheta()/Math.PI*180 + SPACE + 
+                new Vector(this.point1, this.point4).getPhi()/Math.PI*180 + SPACE ) ;
 
-//        System.out.println(text);
+    //    System.out.println(text);
 
 
        ExportFile.addTextToExportFile(text, false);
@@ -84,6 +85,38 @@ public class Parallelepiped implements Element {
         //System.out.println(p.x,p.y,p.z);
 
 
+    }
+
+
+
+    
+    /* Метод для поворота параллелепипеда относительно какой то из координатных  
+    осей x,y,z (1,2,3)*/
+    public Parallelepiped rotation(double angle, int axis){
+
+        Point p1 = this.point1.rotation(angle,axis);
+        Point p2 = this.point2.rotation(angle,axis);
+        Point p3 = this.point3.rotation(angle,axis);
+        Point p4 = this.point4.rotation(angle,axis);
+        Point p5 = this.point5.rotation(angle,axis);
+        Point p6 = this.point6.rotation(angle,axis);
+        Point p7 = this.point7.rotation(angle,axis);
+        Point p8 = this.point8.rotation(angle,axis);
+        return new Parallelepiped(p1,p2,p3,p4,p5,p6,p7,p8);
+    }
+
+    
+    public Parallelepiped move(Vector vector){
+
+        Point p1 = this.point1.move(vector);
+        Point p2 = this.point2.move(vector);
+        Point p3 = this.point3.move(vector);
+        Point p4 = this.point4.move(vector);
+        Point p5 = this.point5.move(vector);
+        Point p6 = this.point6.move(vector);
+        Point p7 = this.point7.move(vector);
+        Point p8 = this.point8.move(vector);
+        return new Parallelepiped(p1,p2,p3,p4,p5,p6,p7,p8);
     }
 
 
@@ -287,61 +320,154 @@ public class Parallelepiped implements Element {
         return true;
     }
 
+
+/* Create Parallelepiped  on zero point with aplpha angle  */
+ public static Parallelepiped getDefineParallelepiped(double a, double b, double c,
+    double alpha_x, double alpha_y, double alpha_z, Vector vect_cent ) {
+
+
+            Point point1 = new Point(0, 0, 0);
+           
+            Point point2 = new Point(0, b, 0);
+            
+            Point point3 = new Point(a, b, 0);
+           
+            Point point4 = new Point(a, 0, 0);
+
+            Point point5 = new Point(0, 0, c);
+           
+            Point point6 = new Point(0, b, c);
+            
+            Point point7 = new Point(a, b, c);
+           
+            Point point8 = new Point(a, 0, c);
+
+
+            Parallelepiped par1 =  new Parallelepiped(point1, point2, point3, point4, point5, point6, point7, point8);
+           
+     
+           Vector v = new Vector(-par1.center.x,-par1.center.y,-par1.center.z);
+
+            par1 = par1.move(v);
+
+            par1 = par1.rotation(alpha_z,3);
+            par1 = par1.rotation(alpha_x,1);
+            par1 = par1.rotation(alpha_y,2);
+           
+
+
+            par1 = par1.move(vect_cent);
+
+
+
+
+        return par1;
+    }
+
+
+
+
+
     public static Parallelepiped getRandomElement(double a, double b, double c) {
-        int flag_initial_distribution = 2;
+        // int flag_initial_distribution = 1;
+
+
+            // /* Old from Barishev */
+            // /* Создаем первую точку*/
+            // double x = Utils.getRandomNumberInRange(Utils.LIMIT_X, 0.0);
+            // double y = Utils.getRandomNumberInRange(Utils.LIMIT_Y, 0.0);
+            // double z = Utils.getRandomNumberInRange(Utils.LIMIT_Z, 0.0);
+            // Point point1 = new Point(x, y, z);
+            // /*Создаем случайную 2-ю точку*/
+            // x = Utils.getRandomNumberInRange(Utils.LIMIT_X, 0.0);
+            // y = Utils.getRandomNumberInRange(Utils.LIMIT_Y, 0.0);
+            // z = Utils.getRandomNumberInRange(Utils.LIMIT_Z, 0.0);
+            // Point point2 = new Point(x, y, z);
+            // /* Получаем точку в направлении вектора проведенного от точки 1 к точке 2 на расстоянии a*/
+            // double length = point1.getDistanceToPoint(point2);
+            // x = (point2.x - point1.x) * a / length + point1.x;
+            // y = (point2.y - point1.y) * a / length + point1.y;
+            // z = (point2.z - point1.z) * a / length + point1.z;
+            // point2 = new Point(x, y, z);
+            // /* Получаем случайный вектор, перпендикулярный 1-му вектору*/
+            // Vector vector1 = new Vector(point2.x - point1.x, point2.y - point1.y, point2.z - point1.z);
+            // Vector vector2 = vector1.getRandomPerpendicularNormalVector();
+            // /* Находим точку вдоль 2-го вектора на расстоянии b от точки 1*/
+            // x = vector2.a * b + point1.x;
+            // y = vector2.b * b + point1.y;
+            // z = vector2.c * b + point1.z;
+            // Point point3 = new Point(x, y, z);
+            // /* Получаем 3-й вектор перпендикулярный двум первым и строим 4 точку на расстоянии c от точки 1*/
+            // Vector vector3 = vector1.getNormalVectorPerpendicularThisAndPassed(vector2);
+            // x = vector3.a * c + point1.x;
+            // y = vector3.b * c + point1.y;
+            // z = vector3.c * c + point1.z;
+            // Point point4 = new Point(x, y, z);
+            // /*Находим все остальные точки*/
+            // x = point2.x + vector3.a * c;
+            // y = point2.y + vector3.b * c;
+            // z = point2.z + vector3.c * c;
+            // Point point5 = new Point(x, y, z);
+            // x = point3.x + vector3.a * c;
+            // y = point3.y + vector3.b * c;
+            // z = point3.z + vector3.c * c;
+            // Point point6 = new Point(x, y, z);
+            // x = point2.x + vector2.a * b;
+            // y = point2.y + vector2.b * b;
+            // z = point2.z + vector2.c * b;
+            // Point point7 = new Point(x, y, z);
+            // x = point7.x + vector3.a * c;
+            // y = point7.y + vector3.b * c;
+            // z = point7.z + vector3.c * c;
+            // Point point8 = new Point(x, y, z);
+                   
+                   
+       
+
+            /* New  My*/
+
 
             /* Создаем первую точку*/
-            double x = Utils.getRandomNumberInRange(Utils.LIMIT_X, 0.0);
-            double y = Utils.getRandomNumberInRange(Utils.LIMIT_Y, 0.0);
-            double z = Utils.getRandomNumberInRange(Utils.LIMIT_Z, 0.0);
-            Point point1 = new Point(x, y, z);
-            /*Создаем случайную 2-ю точку*/
-            x = Utils.getRandomNumberInRange(Utils.LIMIT_X, 0.0);
-            y = Utils.getRandomNumberInRange(Utils.LIMIT_Y, 0.0);
-            z = Utils.getRandomNumberInRange(Utils.LIMIT_Z, 0.0);
-            Point point2 = new Point(x, y, z);
-            /* Получаем точку в направлении вектора проведенного от точки 1 к точке 2 на расстоянии a*/
-            double length = point1.getDistanceToPoint(point2);
-            x = (point2.x - point1.x) * a / length + point1.x;
-            y = (point2.y - point1.y) * a / length + point1.y;
-            z = (point2.z - point1.z) * a / length + point1.z;
-            point2 = new Point(x, y, z);
-            /* Получаем случайный вектор, перпендикулярный 1-му вектору*/
-            Vector vector1 = new Vector(point2.x - point1.x, point2.y - point1.y, point2.z - point1.z);
-            Vector vector2 = vector1.getRandomPerpendicularNormalVector();
-            /* Находим точку вдоль 2-го вектора на расстоянии b от точки 1*/
-            x = vector2.a * b + point1.x;
-            y = vector2.b * b + point1.y;
-            z = vector2.c * b + point1.z;
-            Point point3 = new Point(x, y, z);
-            /* Получаем 3-й вектор перпендикулярный двум первым и строим 4 точку на расстоянии c от точки 1*/
-            Vector vector3 = vector1.getNormalVectorPerpendicularThisAndPassed(vector2);
-            x = vector3.a * c + point1.x;
-            y = vector3.b * c + point1.y;
-            z = vector3.c * c + point1.z;
-            Point point4 = new Point(x, y, z);
-            /*Находим все остальные точки*/
-            x = point2.x + vector3.a * c;
-            y = point2.y + vector3.b * c;
-            z = point2.z + vector3.c * c;
-            Point point5 = new Point(x, y, z);
-            x = point3.x + vector3.a * c;
-            y = point3.y + vector3.b * c;
-            z = point3.z + vector3.c * c;
-            Point point6 = new Point(x, y, z);
-            x = point2.x + vector2.a * b;
-            y = point2.y + vector2.b * b;
-            z = point2.z + vector2.c * b;
-            Point point7 = new Point(x, y, z);
-            x = point7.x + vector3.a * c;
-            y = point7.y + vector3.b * c;
-            z = point7.z + vector3.c * c;
-            Point point8 = new Point(x, y, z);
-                   
-     
+            // double alpha_x = Utils.getRandomNumberInRange(-180.0*0-0.1, 180.0*0+0.1);
+            // double alpha_x = Utils.getRandomNumberInRange(-180.0, 180.0);
+            // double alpha_y = Utils.getRandomNumberInRange(-180.0, 180.0);
+
+            double alpha_x = 0;
+            double alpha_y = 0;
+            double alpha_z = Utils.getRandomNumberInRange(-180.0, 180.0);
 
 
-        return new Parallelepiped(point1, point3, point7, point2, point4, point6, point8, point5);
+            double theta = Utils.getRandomNumberInRange(-Math.PI/2, Math.PI/2);
+            double phi = Utils.getRandomNumberInRange(-Math.PI, Math.PI);
+
+        
+
+            alpha_x = Math.asin(-Math.sin(theta)*Math.sin(phi));
+
+            if (Math.cos(alpha_x) != 0){
+                alpha_y = Math.asin(Math.sin(theta)*Math.cos(phi)/Math.cos(alpha_x));
+            }else{
+                // Любое подойдет т.к. вектор лежит на оси y
+                alpha_y = 0.0;
+            }
+
+            alpha_x = alpha_x/Math.PI*180.0;
+            alpha_y = alpha_y/Math.PI*180.0;
+
+
+
+
+
+            Vector vector_centr = new Vector(
+                Utils.getRandomNumberInRange(Utils.LIMIT_X, 0.0),
+                Utils.getRandomNumberInRange(Utils.LIMIT_Y, 0.0),
+                Utils.getRandomNumberInRange(Utils.LIMIT_Z, 0.0));
+
+
+            Parallelepiped par =  Parallelepiped.getDefineParallelepiped(a, b, c, alpha_x, alpha_y, alpha_z, vector_centr );
+
+
+        return par;
     }
 
     public static ArrayList<Element> getParallelepipeds(int numberOfElements, double a, double b, double c, double t) {
