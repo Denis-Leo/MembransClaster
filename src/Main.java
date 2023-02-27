@@ -47,6 +47,10 @@ public class Main {
 
 
 
+        Tests test = new  Tests(1);
+        test.test_point();
+
+
 
         System.out.println("Helloy");
 

@@ -55,4 +55,25 @@ public class Point {
     public boolean equals(Point point) {
         return Utils.isEquals(this.x, point.x) && Utils.isEquals(this.y, point.y) && Utils.isEquals(this.z, point.z);
     }
+
+
+    public void rotation(double angle, int axis){
+        double x_new = this.x;
+        double y_new = this.y;
+        double z_new = this.z;
+
+        if (axis == 1){
+            x_new = this.x;
+            y_new = this.y*Math.cos(angle) - this.z*Math.sin(angle);
+            z_new = this.y*Math.sin(angle) + this.z*Math.cos(angle);
+        }
+        
+
+
+        this.x = x_new;
+        this.y = y_new;
+        this.z = z_new;
+        
+    }
+
 }
