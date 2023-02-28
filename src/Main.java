@@ -40,7 +40,7 @@ public class Main {
         ExportFile.nameExportDir = args[6];
 
 
-        int number_of_points = 3;
+        int number_of_points = 1;
 
         int number_of_itaration = 20;
         

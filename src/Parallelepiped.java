@@ -350,6 +350,11 @@ public class Parallelepiped implements Element {
 
             par1 = par1.move(v);
 
+            // par1 = par1.rotation(alpha_z,3);
+            // par1 = par1.rotation(alpha_x,2);
+            // par1 = par1.rotation(alpha_y,3);
+
+
             par1 = par1.rotation(alpha_z,3);
             par1 = par1.rotation(alpha_x,1);
             par1 = par1.rotation(alpha_y,2);
@@ -434,13 +439,20 @@ public class Parallelepiped implements Element {
 
             double alpha_x = 0;
             double alpha_y = 0;
-            double alpha_z = Utils.getRandomNumberInRange(-180.0, 180.0);
+            // double alpha_z = Utils.getRandomNumberInRange(180.0, -180.0);
+            double alpha_z = 0;
 
 
-            double theta = Utils.getRandomNumberInRange(-Math.PI/2, Math.PI/2);
-            double phi = Utils.getRandomNumberInRange(-Math.PI, Math.PI);
+            // theta from 0 to 90
 
-        
+            double gamma = Utils.getRandomNumberInRange(-180.0, 180.0)*Math.PI/180.0;
+            // double theta = Utils.getRandomNumberInRange(0, 90.0)*Math.PI/180.0;
+            // double phi = Utils.getRandomNumberInRange(-180.0, 180.0)*Math.PI/180.0;
+            double theta = Utils.getRandomNumberInRange(0.0, 90.0)*Math.PI/180.0;
+            double phi = Utils.getRandomNumberInRange(-180.0, 180.0)*Math.PI/180.0;
+
+
+
 
             alpha_x = Math.asin(-Math.sin(theta)*Math.sin(phi));
 
@@ -453,9 +465,12 @@ public class Parallelepiped implements Element {
 
             alpha_x = alpha_x/Math.PI*180.0;
             alpha_y = alpha_y/Math.PI*180.0;
+            alpha_z = gamma/Math.PI*180.0;
 
 
-
+            // alpha_x = theta;
+            // alpha_y = phi;
+            // alpha_z = gamma - phi;
 
 
             Vector vector_centr = new Vector(
@@ -464,6 +479,7 @@ public class Parallelepiped implements Element {
                 Utils.getRandomNumberInRange(Utils.LIMIT_Z, 0.0));
 
 
+            // Parallelepiped par =  Parallelepiped.getDefineParallelepiped(a, b, c, alpha_x, alpha_y, alpha_z, vector_centr );
             Parallelepiped par =  Parallelepiped.getDefineParallelepiped(a, b, c, alpha_x, alpha_y, alpha_z, vector_centr );
 
 

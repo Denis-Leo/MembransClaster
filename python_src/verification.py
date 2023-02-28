@@ -199,7 +199,10 @@ plt.subplot(2, 3, 6)
 plt.hist(x[5],bins = n_bins)
 plt.xlabel(r'$\gamma$')
 
-# plt.savefig('Fig_'+name_txt.replace('.txt','.png'))
+plt.savefig(name_txt.replace('.txt','.png'))
+
+
+
 plt.show()
 
 
