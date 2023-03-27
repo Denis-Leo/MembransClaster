@@ -6,6 +6,7 @@ public class Utils {
     public static  double LIMIT_Y = 10.0;
     public static  double LIMIT_Z = 10.0;
 
+
     public static final double DELTA = 30;
 
     public static final Parallelepiped lowBoundary = new Parallelepiped(
@@ -74,6 +75,9 @@ public class Utils {
         ArrayList<Double> clusterCapacities = new ArrayList<>();
         for (int i = 0; i < numberOfIterations; ++i) {
             ArrayList<Element> parallelepipeds = Parallelepiped.getParallelepipeds(numberOfElements, a, b, c, t);
+
+
+
             if (Utils.hasClaster(parallelepipeds, flag)) {
                 numberOfClasters += 1.0;
                 double clusterСapacity = Utils.getClusterCapacity(parallelepipeds, flag);
@@ -115,6 +119,9 @@ public class Utils {
         int countOfNodes = 0;
         for (Map.Entry<Element, Boolean> verticles : visitedVerticles.entrySet()) {
             if (Utils.isConnectedWithBoundaries(graph, verticles.getKey(), flag)) {
+                // !! verticles.getKey() - is element with Claster !!
+                verticles.getKey().printInfo("Cluster");
+
                 ++countOfNodes;
             }
         }

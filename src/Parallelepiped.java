@@ -19,6 +19,7 @@ public class Parallelepiped implements Element {
 
     public Point center;
 
+
     public double radius;
 
     ArrayList<Line> edgesOfParallelepiped = null;
@@ -64,9 +65,10 @@ public class Parallelepiped implements Element {
 
     }
 
-    public void printInfo(){
+    public void printInfo(String mode){
         String text ;
         String SPACE = "  " ;
+
 
         text =  this.center.x + SPACE+ this.center.y + SPACE+ this.center.z + SPACE ;
         text += (new Vector(this.point1, this.point5).getPhi()/Math.PI*180 +
@@ -75,21 +77,24 @@ public class Parallelepiped implements Element {
 
     //    System.out.println(text);
 
+        if (mode == "Report" ){
+            ExportFile.addTextToExportFile(text, false);
 
-       ExportFile.addTextToExportFile(text, false);
+        }
+        if (mode == "Cluster" ){
+            ExportFile.addTextToExportClusterFile(text, false);
 
+        }
 
+    }
 
-
-        //p = this.point2;
-        //System.out.println(p.x,p.y,p.z);
-
+    public void printInfo(){
+        printInfo("Report");
 
     }
 
 
 
-    
     /* Метод для поворота параллелепипеда относительно какой то из координатных  
     осей x,y,z (1,2,3)*/
     public Parallelepiped rotation(double angle, int axis){
@@ -495,6 +500,9 @@ public class Parallelepiped implements Element {
 
         ExportFile.addTextToExportFile("#____________", false);
 
+        
+        // boolean withWall = false;
+
         boolean withWall = false;
 
 
@@ -503,6 +511,7 @@ public class Parallelepiped implements Element {
             boolean isIntersects = true;
             while (isIntersects) {
                 internalParallelepiped = Parallelepiped.getRandomElement(a, b, c);
+
 
                 // // Проверка с пересечением с верхней и нижней стенкой мембраны
                 if (withWall == true){

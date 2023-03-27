@@ -34,7 +34,7 @@ public interface Element {
 
 
     void printInfo();
-
+    void printInfo(String mode);
 
 }
 

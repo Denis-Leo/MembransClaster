@@ -17,10 +17,17 @@ public class Sphere implements Element {
         this.neighbours.add(sphere);
     }
 
+    public void printInfo(String mode){
+        System.out.println("Info: " + this.R + "   " );
+
+    }
+
     public void printInfo(){
         System.out.println("Info: " + this.R + "   " );
 
     }
+
+
 
 
     public static Sphere getRandomElement(double R) {

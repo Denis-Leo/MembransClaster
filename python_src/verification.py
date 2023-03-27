@@ -5,7 +5,7 @@ from numpy import array, exp
 import matplotlib.pyplot as plt 
 import numpy as np
 #from scipy.interpolate import interp1d
-#from scipy.integrate import quad
+from scipy.integrate import quad
 
 import os
 import sys
@@ -101,13 +101,19 @@ name_txt =  "D_5.0x5.0x5.0_3.0x3.0x0.001_without_Wall.txt"
 
 name_txt = "tests/D_20.0x20.0x20.0_1.0x1.0x1.0_.txt"
 
-
-#name_txt =  "D_5.0x5.0x5.0_3.0x3.0x0.001_with_Wall.txt"
-
+name_txt = "tests/D_20.0x1.0x0.001_1.0x0.001x0.001_.txt"
 
 
+name_txt =  "tests/D_10.0x0.001x1.0_0.03x0.001x0.001_.txt"
 
+name_txt = "tests/D_10.0x0.001x1.0_0.7x0.001x0.001_.txt"
 
+name_txt = "tests/old_D_20.0x20.0x20.0_1.0x1.0x1.0_.txt"
+
+name_txt = "tests/D_300.0x300.0x10.0_1.0x1.0x0.0011_.txt"
+
+# name_txt = "tests/"
+# name_txt = "tests/"
 
 
 sets, params = import_dat_plots(name_txt)
@@ -195,9 +201,9 @@ plt.hist(x[4],bins = n_bins)
 plt.xlabel(r'$\theta$')
 
 
-plt.subplot(2, 3, 6)
-plt.hist(x[5],bins = n_bins)
-plt.xlabel(r'$\gamma$')
+# plt.subplot(2, 3, 6)
+# plt.hist(x[5],bins = n_bins)
+# plt.xlabel(r'$\gamma$')
 
 plt.savefig(name_txt.replace('.txt','.png'))
 

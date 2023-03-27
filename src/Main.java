@@ -19,7 +19,7 @@ public class Main {
 
 
 
-        double t = 0.1;
+        double t = 0.1*0+1.0;
 
         double a = 5;
         double b = 5;
@@ -45,8 +45,9 @@ public class Main {
         int number_of_itaration = 20;
         
         number_of_itaration = Integer.parseInt(args[7]);
+        number_of_points = Integer.parseInt(args[8]);
 
-
+        // public boolean wall_on = false;
 
 
         Tests test = new  Tests(2);
@@ -59,6 +60,11 @@ public class Main {
 
         String name_export_file = ("D_"+Utils.LIMIT_X+"x"+Utils.LIMIT_Y+"x"+Utils.LIMIT_Z +
                 "_"+ a+"x"+ b +"x"+c+"_.txt" );
+
+        ExportFile.NAME_EXPORT_CLUSTER = "CLUSTER_MAIN.txt";
+        ExportFile.NAME_EXPORT_CLUSTER = ("Cluster_D_"+Utils.LIMIT_X+"x"+Utils.LIMIT_Y+"x"+Utils.LIMIT_Z +
+                "_"+ a+"x"+ b +"x"+c+"_.txt" );
+
         ExportFile.nameTextFile =name_export_file;
 
         String title_text;
@@ -72,8 +78,21 @@ public class Main {
                 "#LIMIT_Z = " + Utils.LIMIT_Z +"\n"+
                 "#  x , y , z,   phi , theta , gamma ");
 
+        String title_text_cluster;
+
+        title_text_cluster = ("# Cluster info   \n" +
+                "#a = " + a + "\n"+
+                "#b = " + b + "\n"+
+                "#c = " + c + "\n"+
+                "#t = " + t + "\n"+
+                "#LIMIT_X = " + Utils.LIMIT_X +"\n"+
+                "#LIMIT_Y = " + Utils.LIMIT_Y +"\n"+
+                "#LIMIT_Z = " + Utils.LIMIT_Z +"\n"+
+                "#  x , y , z,   phi , theta , gamma ");
+
 
         ExportFile.addTextToExportFile(title_text, true);
+        ExportFile.addTextToExportClusterFile(title_text_cluster, true);
 
 //        ExportFile.addTitleTextToExportFile();
 
@@ -90,6 +109,7 @@ public class Main {
                 clasterCapacities.addAll(intermediateClasterCapacities);
                 ++k;
             }
+
 
             ExportFile.addTextToExportFile("# end solve case  \n\n\n", false);
             System.out.println("////////////");
